@@ -276,7 +276,7 @@ void (function (root, factory) {
 
 ;(function($){
 
-		var WPSP = {
+		var SPWP = {
 		init: function(){
 
 			document.addEventListener('ready turbolinks:load', function(event) {
@@ -289,15 +289,15 @@ void (function (root, factory) {
 
 			document.addEventListener('turbolinks:before-visit', function(event) {
 
-				if( event.data.url.indexOf( WPSP_VARS.admin_url ) !== -1 ){
+				if( event.data.url.indexOf( SPWP_VARS.admin_url ) !== -1 ){
 			  		event.preventDefault();
-			  		// alert('admin');
+			  		alert('admin');
 			  		document.location = event.data.url;
 			  	}
 			});
 		}
 	};
 
-	WPSP.init();
+	SPWP.init();
 
 })(jQuery);

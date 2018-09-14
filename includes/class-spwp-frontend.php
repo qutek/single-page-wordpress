@@ -1,8 +1,8 @@
 <?php
 /**
- * WPSP_Frontend Class.
+ * SPWP_Frontend Class.
  *
- * @class       WPSP_Frontend
+ * @class       SPWP_Frontend
  * @version		1.0.0
  * @author lafif <hello@lafif.me>
  */
@@ -12,9 +12,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * WPSP_Frontend class.
+ * SPWP_Frontend class.
  */
-class WPSP_Frontend {
+class SPWP_Frontend {
 
     /**
      * Singleton method
@@ -25,7 +25,7 @@ class WPSP_Frontend {
         static $instance = false;
 
         if ( ! $instance ) {
-            $instance = new WPSP_Frontend();
+            $instance = new SPWP_Frontend();
         }
 
         return $instance;
@@ -49,7 +49,7 @@ class WPSP_Frontend {
 		global $wp_scripts;
 
 	 	// @todo | conditional from option
-		$should_change = apply_filters( 'wpsp_should_change_script_tag', true, $handle );
+		$should_change = apply_filters( 'spwp_should_change_script_tag', true, $handle );
 
 		if( $should_change ){
 			$data = $wp_scripts->registered[$handle]->deps;
@@ -63,7 +63,7 @@ class WPSP_Frontend {
 		global $wp_styles;
 
 		// @todo | conditional from option
-		$should_change = apply_filters( 'wpsp_should_change_style_tag', true, $handle );
+		$should_change = apply_filters( 'spwp_should_change_style_tag', true, $handle );
 		
 		if( $should_change ){
 			$rel = $wp_styles->get_data( $handle, 'alt' ) ? 'alternate stylesheet' : 'stylesheet';
@@ -75,9 +75,9 @@ class WPSP_Frontend {
 
 	public function enqueue_scripts(){
 
-		if( WPSP()->is_request( 'frontend' ) ){
- 			wp_enqueue_script( 'wpsp' );
- 			wp_localize_script( 'wpsp', 'WPSP_VARS', array(  
+		if( SPWP()->is_request( 'frontend' ) ){
+ 			wp_enqueue_script( 'spwp' );
+ 			wp_localize_script( 'spwp', 'SPWP_VARS', array(  
  				'admin_url' => admin_url()
  			) );
  		}
@@ -209,4 +209,4 @@ class WPSP_Frontend {
 
 }
 
-WPSP_Frontend::instance();
+SPWP_Frontend::instance();

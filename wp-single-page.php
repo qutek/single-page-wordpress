@@ -1,12 +1,12 @@
 <?php
 /**
- * Plugin Name: WP Single Page
+ * Plugin Name: Single Page WordPress
  * Description: Turn WordPress site into single page app
  * Author: Lafif Astahdziq
  * Author URI: https://lafif.me
  * Author Email: hello@lafif.me
  * Version: 0.0.1
- * Text Domain: wpsp
+ * Text Domain: spwp
  * Domain Path: /languages/ 
  */
 
@@ -14,15 +14,15 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
-if ( ! class_exists( 'WP_Single_Page' ) ) :
+if ( ! class_exists( 'Single_Page_WP' ) ) :
 
 /**
- * Main WP_Single_Page Class
+ * Main Single_Page_WP Class
  *
- * @class WP_Single_Page
+ * @class Single_Page_WP
  * @version	1.0.0
  */
-final class WP_Single_Page {
+final class Single_Page_WP {
 
 	/**
 	 * @var string
@@ -32,19 +32,19 @@ final class WP_Single_Page {
 	public $capability = 'manage_options';
 
 	/**
-	 * @var WP_Single_Page The single instance of the class
+	 * @var Single_Page_WP The single instance of the class
 	 * @since 1.0.0
 	 */
 	protected static $_instance = null;
 
 	/**
-	 * Main WP_Single_Page Instance
+	 * Main Single_Page_WP Instance
 	 *
-	 * Ensures only one instance of WP_Single_Page is loaded or can be loaded.
+	 * Ensures only one instance of Single_Page_WP is loaded or can be loaded.
 	 *
 	 * @since 1.0.0
 	 * @static
-	 * @return WP_Single_Page - Main instance
+	 * @return Single_Page_WP - Main instance
 	 */
 	public static function instance() {
 		if ( is_null( self::$_instance ) ) {
@@ -54,14 +54,14 @@ final class WP_Single_Page {
 	}
 
 	/**
-	 * WP_Single_Page Constructor.
+	 * Single_Page_WP Constructor.
 	 */
 	public function __construct() {
 		$this->define_constants();
 		$this->includes();
 		$this->init_hooks();
 
-		do_action( 'wptb_loaded' );
+		do_action( 'spwp_loaded' );
 	}
 
 	/**
@@ -84,7 +84,7 @@ final class WP_Single_Page {
 	public function install() {
 		
 		// we did something on install
-		do_action( 'on_wptb_install' );
+		do_action( 'on_spwp_install' );
 	}
 
 	/**
@@ -94,11 +94,11 @@ final class WP_Single_Page {
 	public function uninstall() {
 
 		// we remove what we did 
-		do_action( 'on_wptb_uninstall' );
+		do_action( 'on_spwp_uninstall' );
 	}
 
 	/**
-	 * Init WP_Single_Page when WordPress Initialises.
+	 * Init Single_Page_WP when WordPress Initialises.
 	 */
 	public function init() {
 
@@ -113,17 +113,17 @@ final class WP_Single_Page {
 	private function register_scripts(){
 
 		$suffix  = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
-		wp_register_script( 'wpsp', plugins_url( '/dist/wpsp'. $suffix . '.js', __FILE__ ), array('jquery'), $this->version, false );
+		wp_register_script( 'spwp', plugins_url( '/dist/spwp'. $suffix . '.js', __FILE__ ), array('jquery'), $this->version, false );
  	}
 
 	/**
-	 * Define WP_Single_Page Constants
+	 * Define Single_Page_WP Constants
 	 */
 	private function define_constants() {
 
-		$this->define( 'WPSP_PLUGIN_FILE', __FILE__ );
-		$this->define( 'WPSP_PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
-		$this->define( 'WPSP_VERSION', $this->version );
+		$this->define( 'SPWP_PLUGIN_FILE', __FILE__ );
+		$this->define( 'SPWP_PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
+		$this->define( 'SPWP_VERSION', $this->version );
 	}
 
 	/**
@@ -161,7 +161,7 @@ final class WP_Single_Page {
 	public function includes() {
 		  
 	  	if ( $this->is_request( 'frontend' ) ) {
-	  		include_once( 'includes/class-wpsp-frontend.php' );
+	  		include_once( 'includes/class-spwp-frontend.php' );
 		}
 	}
 
@@ -194,13 +194,13 @@ final class WP_Single_Page {
 endif;
 
 /**
- * Returns the main instance of WP_Single_Page to prevent the need to use globals.
+ * Returns the main instance of Single_Page_WP to prevent the need to use globals.
  *
  * @since  1.0.0
- * @return WP_Single_Page
+ * @return Single_Page_WP
  */
-function WPSP() {
-	return WP_Single_Page::instance();
+function SPWP() {
+	return Single_Page_WP::instance();
 }
 
-WPSP();
+SPWP();

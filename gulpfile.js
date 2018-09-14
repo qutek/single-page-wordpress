@@ -12,7 +12,7 @@ gulp.task('scripts', function() {
 	  	'src/index.js'
   	])
   	.pipe(strip())
-    .pipe(concat('wpsp.js'))
+    .pipe(concat('spwp.js'))
   	.pipe(gulp.dest(dest))
     .pipe(uglify())
     .pipe(rename({ extname: '.min.js' }))

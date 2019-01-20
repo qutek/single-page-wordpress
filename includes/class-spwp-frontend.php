@@ -41,7 +41,7 @@ class SPWP_Frontend {
 		add_filter( 'style_loader_tag', array( $this, 'change_style_loader_tag' ), 100, 3 );
 
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
-		add_action( 'wp_loaded', array( $this, 'move_footer_scripts' ), 100 );
+		// add_action( 'wp_loaded', array( $this, 'move_footer_scripts' ), 100 );
 		add_action( 'wp_head', array( $this, 'add_loadcss_js' ), 10);
 	}
 

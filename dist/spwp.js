@@ -280,7 +280,8 @@ void (function (root, factory) {
 		init: function(){
 
 			document.addEventListener('ready turbolinks:load', function(event) {
-			  $.onmount();
+			  $.onmount.teardown();
+			  $(document).trigger('ready');
 			});
 
 			document.addEventListener('turbolinks:before-cache', function(event) {
